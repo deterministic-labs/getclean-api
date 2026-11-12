@@ -2,6 +2,10 @@
 
 Every change of the getclean API contract, newest first. The format follows Keep a Changelog, and the version numbers follow semantic versioning as `RELEASE.md` states it.
 
+## 1.0.3 - 2026-11-12
+
+The same wording on `who_must_act` in the two places 1.0.1 had not reached, the opening and the `Problem.type` description. No member, value or example changed.
+
 ## 1.0.2 - 2026-11-12
 
 Six sentences reworded, and two parameter examples made to agree with the answers beside them. No member or value changed.
