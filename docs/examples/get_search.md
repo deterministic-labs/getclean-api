@@ -13,7 +13,7 @@ The first page is the original answer as stored, whatever `page_size`: its membe
 The request:
 
 ```sh
-curl https://api.getclean.ai/v1/search/srch_4HmUunqCCXquleKVCosqFG?page_token=eyJzIjoic3JjaF80SG0iLCJvIjozfQ \
+curl https://api.getclean.ai/v1/search/srch_4HmUunqCCXquleKVCosqFG?page_token=eyJzIjoic3JjaF80SG0iLCJvIjoyfQ \
   -H "Authorization: Bearer $GETCLEAN_API_KEY"
 ```
 

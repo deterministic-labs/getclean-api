@@ -13,7 +13,7 @@ Give it the `cnt_` id an earlier `fetch_contents`, `upload_contents` or `search`
 The request:
 
 ```sh
-curl https://api.getclean.ai/v1/contents/cnt_5Gh7cdyeVQ6qoJhBFE31L1?max_characters=1000000 \
+curl https://api.getclean.ai/v1/contents/cnt_5Gh7cdyeVQ6qoJhBFE31L1?max_characters=200000 \
   -H "Authorization: Bearer $GETCLEAN_API_KEY"
 ```
 

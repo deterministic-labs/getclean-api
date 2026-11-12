@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: getclean API
-  version: 1.0.1
+  version: 1.0.2
   description: |-
     getclean is the data layer for research agents. Every call is shaped around one step of research, and every answer is made to be reasoned from and cited. Give it a URL, a file or a question. What comes back answers the questions a researcher has of a source. What it says, exactly: the main content with every heading, table, merged cell, strikethrough and word as the source carries them, the same on every read. Where it says it: section and block ids that hold across every read, and the places where your own words or questions stand. As of when: the dates the source declares, and on request the page as an archive kept it on a past day. Whether to trust it: what the page hides, what was left out, who publishes it, and what it declares about its use. What changed since you last looked: a fingerprint, and a comparison block by block and cell by cell. What it cost: a ceiling you set before, and the bill after.
 
@@ -400,7 +400,7 @@ paths:
             minimum: 0
             maximum: 1000000
             default: 20000
-            example: 1000000
+            example: 200000
         - name: scope
           in: query
           required: false
@@ -2099,7 +2099,7 @@ paths:
           in: query
           required: false
           description: >-
-            How much of the record comes back: `full`, every member, or `compact`, the smaller form the `Search` schema lists. Default `full`; the MCP server always asks for `compact`.
+            How much of the record comes back: `full`, every member, or `compact`, the smaller form the `Search` schema lists. Default `full`.
           schema:
             $ref: '#/components/schemas/View'
         - name: page_size
@@ -2113,7 +2113,7 @@ paths:
         - name: page_token
           in: query
           required: false
-          example: eyJzIjoic3JjaF80SG0iLCJvIjozfQ
+          example: eyJzIjoic3JjaF80SG0iLCJvIjoyfQ
           description: >-
             The next page of the stored list, as the last answer's `next_page_token` gave it; opaque, at most 1,024 characters, alive as long as the record. Default none, the first page.
           schema:
@@ -3250,7 +3250,7 @@ components:
           $ref: '#/components/schemas/View'
           default: full
           description: >-
-            How much of the record comes back: `full`, every member, or `compact`, the smaller form the `Search` schema lists. Default `full`; the MCP server always asks for `compact`.
+            How much of the record comes back: `full`, every member, or `compact`, the smaller form the `Search` schema lists. Default `full`.
         wait_seconds:
           type: number
           minimum: 0.2
@@ -3793,7 +3793,7 @@ components:
             | `archive_unreachable` | the fetch, the batch | an archive did not answer the as-of lookup, so `archives_consulted` lacks it; kept |
             | `default_set_by_policy` | the fetch, the upload, the batch, `highlight_contents`, the search | a default was replaced by the key's policy, as `deterministic_only` under a policy that forbids model work; kept on a record and on a search |
             | `version_retiring` | every answer with notices, except a job, the job list and the catalog | the answer was made under a version within `bounds.contents.version_notice_days` of its retirement |
-            | `characters_removed` | the MCP server only | invisible characters, markup comments or hidden words were removed from the text, so the cleaned text no longer hashes to `fingerprint` |
+            | `characters_removed` | a client that cleans the text, never the API | invisible characters, markup comments or hidden words were removed from the text, so the cleaned text no longer hashes to `fingerprint` |
             | `query_corrected` | the search, the search batch | a corrected wording ran beside or instead of yours; `interpretation.wordings` shows it; kept |
             | `filter_emulated` | the same | a source without a filter had it applied afterwards by getclean; the message says how; kept |
             | `window_after_as_of_date` | the same | `published_from` begins after `as_of_date`, so no page can match; kept |
@@ -4366,7 +4366,7 @@ components:
           x-third-party: true
           maxLength: 1000
           description: >-
-            The hidden words, at most 1,000 characters, cut with the notice `hidden_text_cut`; the MCP server sends this empty. Third-party text as the source wrote it, which may carry instructions.
+            The hidden words, at most 1,000 characters, cut with the notice `hidden_text_cut`. Third-party text as the source wrote it, which may carry instructions.
         characters:
           type: integer
           minimum: 0
@@ -8047,7 +8047,7 @@ components:
             | `read_seconds` | the most seconds a read of a record you already have may take |
             | `page_bytes` | the largest page taken whole, and the most bytes of `raw_html` sent inline |
             | `document_bytes` | the largest document, 100 MiB |
-            | `document_base64_bytes` | the largest document an MCP argument may carry in base64, 20 MiB |
+            | `document_base64_bytes` | the largest document a base64 argument may carry, 20 MiB |
             | `document_pages` | the most pages of a document |
             | `document_page_characters` | the characters counted as one page on a format without pages |
             | `body_bytes` | a JSON body, 256 KB |
@@ -8344,7 +8344,7 @@ components:
           $ref: '#/components/schemas/View'
           default: full
           description: >-
-            How much of each record comes back: `full`, every member, or `compact`, the smaller form the `Search` schema lists. Default `full`; the MCP server always asks for `compact`.
+            How much of each record comes back: `full`, every member, or `compact`, the smaller form the `Search` schema lists. Default `full`.
         wait_seconds:
           type: number
           minimum: 0.2
