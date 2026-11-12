@@ -1,0 +1,49 @@
+# The data beside SDK-NOTES.md: the environment, the per-request headers, the echoed request type, the pagers and
+# the retries. Every key is optional, and every name here is one the contract declares.
+
+environments:            # one entry per server of the contract, by position
+  - name: Production
+
+per_request_headers:     # headers that leave the SDKs whole; callers send them through the request options
+  - traceparent
+
+echo_names:              # a request schema echoed in an answer, and the name its type takes in the SDKs
+  SearchRequest: AppliedSearchRequest
+
+pagers:                  # one per paged list operation; get_section is not one, its cut text is paged by the SDKs' iter_section
+  - operation: list_blocks
+    request_token: {in: query, name: page_token}
+    next_token: next_page_token
+    items: blocks
+  - operation: list_links
+    request_token: {in: query, name: page_token}
+    next_token: next_page_token
+    items: links
+  - operation: compare_contents
+    request_token: {in: body, name: page_token}
+    next_token: next_page_token
+    items: changes
+  - operation: list_jobs
+    request_token: {in: query, name: page_token}
+    next_token: next_page_token
+    items: jobs
+  - operation: list_contents
+    request_token: {in: query, name: page_token}
+    next_token: next_page_token
+    items: contents
+  - operation: get_search
+    request_token: {in: query, name: page_token}
+    next_token: next_page_token
+    items: candidates
+  - operation: list_datasources
+    request_token: {in: query, name: page_token}
+    next_token: next_page_token
+    items: datasources
+
+retries:
+  statuses: [429, 502, 503, 504]   # retried by every SDK, after Retry-After when the answer carries one within the cap below
+  problem_types: [idempotency-key-in-flight]   # an error answer of any other status is retried when its problem type's last segment is listed here, under the same count of attempts
+  never: [409]                     # a 409 is never retried by its status alone; only the problem type above is, so record-without-content is raised at once
+  max_retries: 4                   # five attempts in all, one count across the statuses and the problem types
+  backoff_cap_seconds: 30          # the backoff starts at 1 second, doubles with jitter, and never passes this; a Retry-After longer than this ends the retries and the answer is returned as it arrived, its retry_after_seconds in the body
+
