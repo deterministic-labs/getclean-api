@@ -70,4 +70,4 @@ A problem is the API's own refusal, `application/problem+json`, RFC 9457. Its `t
 | `gateway-error`, `gateway-timeout` | 502, 504 | the service | a model step behind the service failed or timed out; retry; nothing was billed |
 | `overloaded` | 503 | the service | wait `Retry-After` and retry |
 
-The SDKs retry `idempotency-key-in-flight`, the two `429` types, `overloaded`, `gateway-error` and `gateway-timeout` on their own, after `Retry-After` when it is sent, at most five attempts, with the same idempotency key, so no retry bills twice.
+The SDKs retry `idempotency-key-in-flight`, the two `429` types, `overloaded`, `gateway-error` and `gateway-timeout` on their own, after `Retry-After` when it is sent, at most five attempts, with the same idempotency key, so no retry bills twice; a `Retry-After` longer than 30 seconds ends the retries and the answer is returned as it came.

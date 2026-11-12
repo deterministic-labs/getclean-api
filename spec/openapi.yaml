@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: getclean API
-  version: 1.0.0
+  version: 1.0.1
   description: |-
     getclean is the data layer for research agents. Every call is shaped around one step of research, and every answer is made to be reasoned from and cited. Give it a URL, a file or a question. What comes back answers the questions a researcher has of a source. What it says, exactly: the main content with every heading, table, merged cell, strikethrough and word as the source carries them, the same on every read. Where it says it: section and block ids that hold across every read, and the places where your own words or questions stand. As of when: the dates the source declares, and on request the page as an archive kept it on a past day. Whether to trust it: what the page hides, what was left out, who publishes it, and what it declares about its use. What changed since you last looked: a fingerprint, and a comparison block by block and cell by cell. What it cost: a ceiling you set before, and the bill after.
 
@@ -6050,7 +6050,7 @@ components:
     Problem:
       type: object
       description: |-
-        An answer that is not a result: `application/problem+json`, RFC 9457, one shape for every status. Read `type` to know what happened, `who_must_act` to know whose move it is, and `change` or `violations` to know what to change. `type`, `title`, `detail`, `instance`, `request_id`, `who_must_act` and `retryable` are always present; `status` on a top-level problem; every other member when it applies. A problem never carries a stack trace, an internal address, a secret, another caller's data or text from a site or a source. A source's or a site's failure is never a problem: it is that item's outcome.
+        An answer that is not a result: `application/problem+json`, RFC 9457, one shape for every status. Read `type` to know what happened, `who_must_act` to know who must act, and `change` or `violations` to know what to change. `type`, `title`, `detail`, `instance`, `request_id`, `who_must_act` and `retryable` are always present; `status` on a top-level problem; every other member when it applies. A problem never carries a stack trace, an internal address, a secret, another caller's data or text from a site or a source. A source's or a site's failure is never a problem: it is that item's outcome.
       required: [type, title, detail, instance, request_id, who_must_act, retryable]
       properties:
         type:
@@ -6127,7 +6127,7 @@ components:
         who_must_act:
           type: string
           description: >-
-            Whose move it is: `caller`, you; `account_owner`, the person who holds the account; `service`, getclean. A closed set. A site's or a source's failure is never a problem, so no value names them.
+            Who must act: `caller`, you; `account_owner`, the person who holds the account; `service`, getclean. A closed set. A site's or a source's failure is never a problem, so no value names them.
           enum: [caller, account_owner, service]
         retryable:
           type: boolean

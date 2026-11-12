@@ -22,7 +22,7 @@ curl https://api.getclean.ai/v1/contents \
   -d '{"url": "https://example.com/q3"}'
 ```
 
-The SDKs read the key from `GETCLEAN_API_KEY` when none is given, so `GetClean()` in Python and `new GetClean({})` in TypeScript are enough on a machine that has it. A function that returns a token is taken in place of the key; the SDK calls it once per call, before the first attempt, and refreshes nothing itself.
+The SDKs read the key from `GETCLEAN_API_KEY` when none is given, so `GetClean()` in Python and `new GetClean()` in TypeScript are enough on a machine that has it. A function that returns a token is taken in place of the key; the SDK calls it once per call, before the first attempt, and refreshes nothing itself.
 
 ## Scopes
 

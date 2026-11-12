@@ -1,4 +1,4 @@
-# The data beside SDK-NOTES.md: the environment, the per-request headers, the echoed request type, the pagers and
+# The data beside SDK-NOTES.md: the environment, the per-request headers, the type of the request a search's answer carries, the pagers and
 # the retries. Every key is optional, and every name here is one the contract declares.
 
 environments:            # one entry per server of the contract, by position

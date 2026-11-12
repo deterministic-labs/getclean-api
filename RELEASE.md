@@ -12,7 +12,7 @@ Each official SDK carries its own version, which starts at `0.1.0` and moves to 
 
 ## What a release promises
 
-Every SDK of a release agrees with the contract it was released against: every operation, parameter, member, value and description, measured before the release and not assumed. Every behavior an SDK adds beyond the contract, the retries, the idempotency key, the timeouts, the pagers and the upload's helper, is stated in `spec/SDK-NOTES.md` and is the same in every language. A package appears on its registry only from its repository's release workflow, with provenance, never from a developer's machine.
+Every SDK of a release agrees with the contract it was released against: every operation, parameter, member, value and description, measured before the release and not assumed. Every behavior an SDK adds beyond the contract, the retries, the idempotency key, the timeouts, the pagers and the upload's helper, is stated in `spec/SDK-NOTES.md`, with the differences a language's runtime imposes named there. Every SDK release reaches its registry from its repository's release workflow, with provenance.
 
 ## Where to look
 
